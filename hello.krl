@@ -22,7 +22,7 @@ A first ruleset for the Quickstart
 rule hello_world {
   select when echo hello
   pre{
-    name = event:attr("name").klog("our passed in Name: ");
+    name = event:attr("name").defaultsTo(ent:name, "No name passed");
   }
   {
     send_directive("say") with
