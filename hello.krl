@@ -32,5 +32,19 @@ rule hello_world {
       log ("LOG says Hello " + name);
   }
 }
+
+rule store_name {
+   select when hello name
+   pre{
+     passed_name = event:attr("name").klog("our passed in Name: ");
+   }
+   {
+     send_directive("store_name") with
+       name = passed_name;
+   }
+   always{
+     set ent:name passed_name;
+   }
+ }
  
 }
