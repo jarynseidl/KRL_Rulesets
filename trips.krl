@@ -25,6 +25,7 @@ A first ruleset for the Quickstart
       trip_length = mileage;
     }
     fired {
+      log ("Raising trip_processed")
       raise explicit event trip_processed attributes event:attrs()
     }
   }
@@ -38,7 +39,7 @@ A first ruleset for the Quickstart
     }
     fired{
       set ent:long_trip mileage;
-      raise explicit event found_long_trip
+      raise explicit event found_long_trip with mileage = ent:long_trip
     }
   }
 }
