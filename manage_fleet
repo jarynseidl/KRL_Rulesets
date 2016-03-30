@@ -1,1 +1,11 @@
-
+ruleset track_trips {
+  meta {
+    name "manage_fleet"
+    description <<
+A first ruleset for the Quickstart
+>>
+    author "Phil Windley"
+    logging on
+    sharing on
+  }
+}
