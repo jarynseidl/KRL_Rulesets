@@ -7,8 +7,20 @@ A first ruleset for the Quickstart
     author "Phil Windley"
     logging on
     sharing on
-    provides hello
- 
+    provides trip, long_trips, short_trips
+  }
+  
+  global{
+    trip = function(){
+      ent:trips
+    };
+    long_trips = function(){
+      ent:long_trips
+    };
+    short_trips = function(){
+      short = ent:trips.difference(ent:long_trips)
+      short
+    };
   }
   rule collect_trips{
     select when explicit trip_processed
@@ -45,24 +57,3 @@ A first ruleset for the Quickstart
     }
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
