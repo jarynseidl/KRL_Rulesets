@@ -25,14 +25,14 @@ A first ruleset for the Quickstart
       trip_length = mileage;
     }
     fired {
-      log ("Raising trip_processed")
+      log ("Raising trip_processed");
       raise explicit event trip_processed attributes event:attrs()
     }
   }
   rule find_long_trips{
     select when explicit trip_processed
     pre{
-      mileage = event:attr("mileage").defaultsTo(0);
+      mileage = event:attr("mileage").defaultsTo(1);
     }
     if mileage > ent:long_trip then{
       log ("New mileage: " + mileage);
