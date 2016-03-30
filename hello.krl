@@ -36,7 +36,7 @@ rule hello_world {
 rule message {
   select when echo message
   pre{
-    message = event:attr("name").defaultsTo(ent:message, "No message passed");
+    message = event:attr("input").defaultsTo(ent:message, "No message passed");
   }
   {
     send_directive("say") with
