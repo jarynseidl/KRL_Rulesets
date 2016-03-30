@@ -10,6 +10,11 @@ A first ruleset for the Quickstart
     provides hello
  
   }
+  
+  global{
+    long_trip = 0;
+  }
+  
   rule process_trip{
     select when car new_trip
     pre{
@@ -20,7 +25,20 @@ A first ruleset for the Quickstart
       trip_length = mileage;
     }
     fired {
-      raise explicit event trip_processed
+      raise explicit event trip_processed attributes event:attrs()
+    }
+  }
+  rule find_long_trips{
+    select when explicit trip_processed
+    pre{
+      mileage = event:attr("mileage").defaultsTo(0);
+    }
+    if mileage > ent:long_trip then{
+      log ("New mileage: " + mileage);
+    }
+    fired{
+      set ent:long_trip mileage;
+      raise explicit event found_long_trip
     }
   }
 }
