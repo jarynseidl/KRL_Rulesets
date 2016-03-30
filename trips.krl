@@ -12,7 +12,7 @@ A first ruleset for the Quickstart
   }
   
   global{
-    long_trip = 0;
+    long_trip = 9;
   }
   
   rule process_trip{
@@ -34,11 +34,10 @@ A first ruleset for the Quickstart
     pre{
       mileage = event:attr("mileage").defaultsTo(1);
     }
-    if mileage > ent:long_trip then{
+    if mileage > long_trip then{
       log ("New mileage: " + mileage);
     }
     fired{
-      set ent:long_trip mileage;
       raise explicit event found_long_trip with mileage = ent:long_trip
     }
   }
