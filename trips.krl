@@ -19,8 +19,8 @@ A first ruleset for the Quickstart
     send_directive("trip") with
       trip_length = mileage;
     }
-    always {
-      log ("LOG says Hello " + name);
+    fired {
+      raise explicit event trip_processed
     }
   }
 }
