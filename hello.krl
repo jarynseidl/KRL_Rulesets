@@ -33,6 +33,17 @@ rule hello_world {
   }
 }
 
+rule message {
+  select when echo message
+  pre{
+    message = event:attr("name").defaultsTo(ent:message, "No message passed");
+  }
+  {
+    send_directive("say") with
+      something = message
+  }
+}
+
 rule store_name {
    select when hello name
    pre{
